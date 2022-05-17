@@ -13,7 +13,15 @@ wget https://bartzi.de/documents/attachment/download?hash_value=1c52f3da5539c3b2
 wget https://bartzi.de/documents/attachment/download?hash_value=b6d671c7fb5e625cacbc10509789498c_69 -O datasetgan_stylegan.tar.gz
 ```
 
-### Use and test the provided docker image
+```
+unzip benchmark_dataset.zip
+7z x -so sis_swagan.tar.gz | 7z x -si -ttar
+7z x -so sis_stylegan.tar.gz | 7z x -si -ttar
+7z x -so datasetgan_swagan.tar.gz | 7z x -si -ttar
+7z x -so datasetgan_stylegan.tar.gz | 7z x -si -ttar
+```
+
+### Using the provided docker image
 
 ```
 # pull docker
