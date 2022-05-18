@@ -74,7 +74,8 @@ PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
   /rlpr/benchmark_dataset/original \
   -gt /rlpr/benchmark_dataset/ground_truth \
   --config-file /rlpr/synthesis-in-style/stylegan_code_finder/configs/evaluation/sis_stylegan_config.json \
-  --output-dir out \
+  --original-config-path /rlpr/synthesis-in-style/stylegan_code_finder/configs/segmenter/stylegan2_trans_u_net_segmenter.yaml \
+  --output-dir /rlpr/out \
   -bw \
   --patch-overlap-factor 0.50 0.0 \
   --min-confidence 0.3 0.7 0.9 \
