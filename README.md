@@ -63,6 +63,8 @@ True
 
 ### Evaluate provided segmentation models
 Create config file
+
+*trans_u_net*
 ```
 vim synthesis-in-style/stylegan_code_finder/configs/evaluation/sis_stylegan_config.json
 ```
@@ -84,6 +86,50 @@ vim synthesis-in-style/stylegan_code_finder/configs/evaluation/datasetgan_styleg
 }
 ```
 
+*Doc-UFCN*
+```
+vim synthesis-in-style/stylegan_code_finder/configs/evaluation/sis_stylegan_ufcn_config.json
+```
+```
+{
+  "checkpoint": "/rlpr/sis_stylegan/doc_ufcn.pt",
+  "class_to_color_map": "handwriting_colors.json",
+  "max_image_size": 0
+}
+```
+```
+vim synthesis-in-style/stylegan_code_finder/configs/evaluation/datasetgan_stylegan_ufcn_config.json
+```
+```
+{
+  "checkpoint": "/rlpr/datasetgan_stylegan/doc_ufcn.pt",
+  "class_to_color_map": "handwriting_colors.json",
+  "max_image_size": 0
+}
+```
+
+*EMANet*
+```
+vim synthesis-in-style/stylegan_code_finder/configs/evaluation/sis_stylegan_emanet_config.json
+```
+```
+{
+  "checkpoint": "/rlpr/sis_stylegan/ema_net.pt",
+  "class_to_color_map": "handwriting_colors.json",
+  "max_image_size": 0
+}
+```
+```
+vim synthesis-in-style/stylegan_code_finder/configs/evaluation/datasetgan_stylegan_emanet_config.json
+```
+```
+{
+  "checkpoint": "/rlpr/datasetgan_stylegan/ema_net.pt",
+  "class_to_color_map": "handwriting_colors.json",
+  "max_image_size": 0
+}
+```
+
 Create result folder
 ```
 # replace "/home/cyril/Development/RLPR" with "$(pwd)"
@@ -92,7 +138,11 @@ docker run -v /home/cyril/Development/RLPR:/rlpr -it --rm --gpus all hendraet/sy
 
 ```
 cd /rlpr/synthesis-in-style/stylegan_code_finder/ 
+```
 
+*trans_u_net*
+
+```
 PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
   /rlpr/benchmark_dataset/original \
   -gt /rlpr/benchmark_dataset/ground_truth \
@@ -107,16 +157,71 @@ PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
   -vis
 ```
 
-
 ```
-cd /rlpr/synthesis-in-style/stylegan_code_finder/ 
-
 PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
   /rlpr/benchmark_dataset/original \
   -gt /rlpr/benchmark_dataset/ground_truth \
   --config-file /rlpr/synthesis-in-style/stylegan_code_finder/configs/evaluation/datasetgan_stylegan_config.json \
   --original-config-path /rlpr/synthesis-in-style/stylegan_code_finder/configs/segmenter/stylegan2_trans_u_net_segmenter.yaml \
   --output-dir /rlpr/out_datasetgan_stylegan \
+  -bw \
+  --patch-overlap-factor 0.50 0.0 \
+  --min-confidence 0.3 0.7 0.9 \
+  --min-contour-area 15 30 55 \
+  -cds -cre -cpr -cio \
+  -vis
+```
+
+*Doc-UFCN*
+```
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
+  /rlpr/benchmark_dataset/original \
+  -gt /rlpr/benchmark_dataset/ground_truth \
+  --config-file /rlpr/synthesis-in-style/stylegan_code_finder/configs/evaluation/sis_stylegan_ufcn_config.json \
+  --original-config-path /rlpr/synthesis-in-style/stylegan_code_finder/configs/segmenter/stylegan2_doc_ufcn_segmenter.yaml \
+  --output-dir /rlpr/out_sis_stylegan_ufcn \
+  -bw \
+  --patch-overlap-factor 0.50 0.0 \
+  --min-confidence 0.3 0.7 0.9 \
+  --min-contour-area 15 30 55 \
+  -cds -cre -cpr -cio \
+  -vis
+
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
+  /rlpr/benchmark_dataset/original \
+  -gt /rlpr/benchmark_dataset/ground_truth \
+  --config-file /rlpr/synthesis-in-style/stylegan_code_finder/configs/evaluation/datasetgan_stylegan_ufcn_config.json \
+  --original-config-path /rlpr/synthesis-in-style/stylegan_code_finder/configs/segmenter/stylegan2_doc_ufcn_segmenter.yaml \
+  --output-dir /rlpr/out_datasetgan_stylegan_ufcn \
+  -bw \
+  --patch-overlap-factor 0.50 0.0 \
+  --min-confidence 0.3 0.7 0.9 \
+  --min-contour-area 15 30 55 \
+  -cds -cre -cpr -cio \
+  -vis
+```
+
+*EMANet*
+```
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
+  /rlpr/benchmark_dataset/original \
+  -gt /rlpr/benchmark_dataset/ground_truth \
+  --config-file /rlpr/synthesis-in-style/stylegan_code_finder/configs/evaluation/sis_stylegan_emanet_config.json \
+  --original-config-path /rlpr/synthesis-in-style/stylegan_code_finder/configs/segmenter/stylegan2_ema_net_segmenter.yaml \
+  --output-dir /rlpr/out_sis_stylegan_emanet \
+  -bw \
+  --patch-overlap-factor 0.50 0.0 \
+  --min-confidence 0.3 0.7 0.9 \
+  --min-contour-area 15 30 55 \
+  -cds -cre -cpr -cio \
+  -vis
+
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
+  /rlpr/benchmark_dataset/original \
+  -gt /rlpr/benchmark_dataset/ground_truth \
+  --config-file /rlpr/synthesis-in-style/stylegan_code_finder/configs/evaluation/datasetgan_stylegan_emanet_config.json \
+  --original-config-path /rlpr/synthesis-in-style/stylegan_code_finder/configs/segmenter/stylegan2_ema_net_segmenter.yaml \
+  --output-dir /rlpr/out_datasetgan_stylegan_emanet \
   -bw \
   --patch-overlap-factor 0.50 0.0 \
   --min-confidence 0.3 0.7 0.9 \
