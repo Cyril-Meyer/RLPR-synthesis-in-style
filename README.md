@@ -72,6 +72,7 @@ vim synthesis-in-style/stylegan_code_finder/configs/evaluation/datasetgan_styleg
 }
 ```
 
+Create result folder
 ```
 # replace "/home/cyril/Development/RLPR" with "$(pwd)"
 docker run -v /home/cyril/Development/RLPR:/rlpr -it --rm --gpus all hendraet/synthesis-in-style:cuda-11.1
@@ -110,8 +111,14 @@ PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
   --min-contour-area 15 30 55 \
   -cds -cre -cpr -cio \
   -vis
- ```
-
+```
+ 
+Extract result and print metrics
+```
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_sis_stylegan/results.json /rlpr/benchmark_dataset/in-domain-images.txt /rlpr/out_sis_stylegan/results_in-domain-images.json
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan/results_in-domain-images.json -c -p
+```
+ 
 ### Missing details
 Using the provided docker :
 * the default python is 2.7, you need to use python3 or python3.8
