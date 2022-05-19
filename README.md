@@ -8,7 +8,8 @@
 Tables I - III are short version of tables IV - V.
 
 in progress
-![image](https://user-images.githubusercontent.com/69190238/169360129-53c2d45b-93c6-467f-9e85-4af182568250.png)
+![image](https://user-images.githubusercontent.com/69190238/169384069-c175a7b1-4acd-4beb-9a08-96a8a1398300.png)
+
 
 #### Figures 3 - 7
 Figure 3 = Figure 4
@@ -304,7 +305,25 @@ PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out
 |  0 |              0.3 |                 15 |               0 |            0.995054 |                 0.766436 |          0.997634 |            0.783077 |                0.491728 |            0.65493 |                0.625356 |         0.995279 |            0.64349 |                0.32602 |                 0.994961 |                      0.815628 |               0.996984 |                  0.82723 |                     0.624111 |              0.995225 |                   0.724109 |            0.998284 |              0.743399 |                  0.405677 |
 |  0 |              0.3 |                 15 |               0 |            0.974935 |                 0.421994 |          0.990067 |            0.490402 |                0.110808 |           0.454613 |                0.276883 |          0.98033 |           0.324856 |              0.0586538 |                 0.974795 |                      0.704286 |               0.982198 |                  0.80184 |                     0.260512 |              0.979528 |                   0.302241 |            0.998063 |              0.353212 |                   0.07037 |
 
- 
+
+```
+# in-domain - ours - EMANet
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_sis_stylegan_emanet/results.json /rlpr/benchmark_dataset/in-domain-images.txt /rlpr/out_sis_stylegan_emanet/results_in-domain-images.json
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan_ufcn/results_in-domain-images.json -c -p
+
+# out-domain - ours - EMANet
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_sis_stylegan_emanet/results.json /rlpr/benchmark_dataset/out-of-domain-images.txt /rlpr/out_sis_stylegan_emanet/results_out-domain-images.json
+
+# in-domain - DatasetGAN - EMANet
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_datasetgan_stylegan_emanet/results.json /rlpr/benchmark_dataset/in-domain-images.txt /rlpr/out_datasetgan_stylegan_emanet/results_in-domain-images.json
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_datasetgan_stylegan_ufcn/results_in-domain-images.json -c -p
+
+# out-domain - DatasetGAN - EMANet
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_datasetgan_stylegan_emanet/results.json /rlpr/benchmark_dataset/out-of-domain-images.txt /rlpr/out_datasetgan_stylegan_emanet/results_out-domain-images.json
+
+```
+
+
 ### Missing details
 Using the provided docker :
 * the default python is 2.7, you need to use python3 or python3.8
