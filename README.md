@@ -3,6 +3,15 @@
 * [github repo](https://github.com/hendraet/synthesis-in-style)
 * [paper](https://arxiv.org/pdf/2107.06777.pdf)
 
+###  Results that can be reproduced
+#### Tables I - VI
+Tables I - III are short version of tables IV - V.
+
+in progress
+
+#### Figures 3 - 7
+not done yet
+
 ### Get the code and data
 ```
 git clone git@github.com:hendraet/synthesis-in-style.git
@@ -115,12 +124,33 @@ PYTHONPATH='.' python3.8 ./segmentation/evaluation/analyze_image_segments.py \
  
 Extract result and print metrics
 ```
+# in-domain - ours - TransUNet
 PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_sis_stylegan/results.json /rlpr/benchmark_dataset/in-domain-images.txt /rlpr/out_sis_stylegan/results_in-domain-images.json
 PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan/results_in-domain-images.json -c -p
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan/results_in-domain-images.json -c -r min_confidence 0.9 min_contour_area 15 patch_overlap 0.5
 ```
+|    |   min_confidence |   min_contour_area |   patch_overlap |   dice_weighted_avg |   dice_weighted_text_avg |   dice_background |   dice_printed_text |   dice_handwritten_text |   iou_weighted_avg |   iou_weighted_text_avg |   iou_background |   iou_printed_text |   iou_handwritten_text |   precision_weighted_avg |   precision_weighted_text_avg |   precision_background |   precision_printed_text |   precision_handwritten_text |   recall_weighted_avg |   recall_weighted_text_avg |   recall_background |   recall_printed_text |   recall_handwritten_text |
+|---:|-----------------:|-------------------:|----------------:|--------------------:|-------------------------:|------------------:|--------------------:|------------------------:|-------------------:|------------------------:|-----------------:|-------------------:|-----------------------:|-------------------------:|------------------------------:|-----------------------:|-------------------------:|-----------------------------:|----------------------:|---------------------------:|--------------------:|----------------------:|--------------------------:|
+|  0 |              0.9 |                 15 |             0.5 |            0.996268 |                 0.821749 |          0.998238 |            0.833186 |                0.632954 |            0.72452 |                0.699729 |         0.996482 |           0.714069 |               0.463008 |                 0.996241 |                      0.833212 |                0.99808 |                 0.842972 |                     0.672105 |              0.996301 |                   0.810744 |            0.998395 |              0.823625 |                  0.598112 |
+
+```
+# out-domain - ours - TransUNet
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_sis_stylegan/results.json /rlpr/benchmark_dataset/out-of-domain-images.txt /rlpr/out_sis_stylegan/results_out-domain-images.json
+# not same post process hyperparam
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan/results_out-domain-images.json -c -p
+# force post process hyperparam
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan/results_out-domain-images.json -c -r min_confidence 0.9 min_contour_area 15 patch_overlap 0.5
+```
+|    |   min_confidence |   min_contour_area |   patch_overlap |   dice_weighted_avg |   dice_weighted_text_avg |   dice_background |   dice_printed_text |   dice_handwritten_text |   iou_weighted_avg |   iou_weighted_text_avg |   iou_background |   iou_printed_text |   iou_handwritten_text |   precision_weighted_avg |   precision_weighted_text_avg |   precision_background |   precision_printed_text |   precision_handwritten_text |   recall_weighted_avg |   recall_weighted_text_avg |   recall_background |   recall_printed_text |   recall_handwritten_text |
+|---:|-----------------:|-------------------:|----------------:|--------------------:|-------------------------:|------------------:|--------------------:|------------------------:|-------------------:|------------------------:|-----------------:|-------------------:|-----------------------:|-------------------------:|------------------------------:|-----------------------:|-------------------------:|-----------------------------:|----------------------:|---------------------------:|--------------------:|----------------------:|--------------------------:|
+|  0 |              0.9 |                 15 |             0.5 |            0.981201 |                 0.573953 |          0.992346 |            0.635311 |                0.294833 |           0.541083 |                  0.4128 |         0.984809 |           0.465536 |               0.172905 |                 0.981267 |                      0.778647 |               0.986812 |                 0.865515 |                     0.383484 |              0.983468 |                   0.454556 |            0.997943 |              0.501837 |                  0.239473 |
+
+
  
 ### Missing details
 Using the provided docker :
 * the default python is 2.7, you need to use python3 or python3.8
 * you need to add PYTHONPATH='.' before python call to avoid import errors
 
+**negligible errors**
+* Table V | handwritten text | recall - ours - TransUNet - rounding error for 0.239473
