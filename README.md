@@ -338,6 +338,55 @@ PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out
 |  0 |              0.3 |                 15 |             0.5 |            0.989764 |                 0.466331 |          0.995671 |            0.469218 |                0.418662 |           0.520884 |                0.304136 |         0.991379 |           0.306522 |               0.264752 |                 0.989651 |                      0.689637 |               0.993037 |                 0.706662 |                     0.408598 |              0.991148 |                   0.355666 |            0.998319 |               0.35121 |                  0.429235 |
 |  0 |              0.3 |                 15 |             0.5 |            0.972311 |                  0.34213 |          0.989558 |             0.38799 |                0.133512 |           0.430517 |                0.210203 |         0.979331 |           0.240687 |              0.0715312 |                 0.973992 |                      0.726767 |               0.980758 |                 0.843593 |                     0.195321 |              0.977906 |                   0.224806 |            0.998516 |               0.25193 |                  0.101419 |
 
+### Evaluate newly trained segmentation models
+
+```
+# replace "/home/cyril/Development/RLPR" with "$(pwd)"
+docker run -v /home/cyril/Development/RLPR:/rlpr -it --rm --gpus all hendraet/synthesis-in-style:cuda-11.1
+```
+
+1. Train StyleGAN2
+```
+cd /rlpr/synthesis-in-style/stylegan_code_finder/scripts
+```
+
+```
+python3 create_stylegan_train_dataset.py /rlpr/benchmark_dataset/original /rlpr/train_StyleGAN2_dataset 50000
+```
+
+```
+cd /rlpr/synthesis-in-style/stylegan_code_finder/ 
+```
+
+```
+PYTHONPATH='.' python3.8 train_stylegan_2.py \
+  configs/stylegan/stylegan_256px.yaml \
+  --images /rlpr/train_StyleGAN2_dataset/train.json \
+  --val-images /rlpr/train_StyleGAN2_dataset/val.json \
+  -l /rlpr/out_cyril_sis_stylegan \
+  -ln wpi_auction_catalogues \
+  --wandb-project-name synthesis-in-style \
+  --wandb-entity cyril-meyer
+```
+```
+Traceback (most recent call last):
+  File "train_stylegan_2.py", line 211, in <module>
+    torch.distributed.init_process_group(backend=args.mpi_backend, init_method='env://')
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/distributed_c10d.py", line 520, in init_process_group
+    store, rank, world_size = next(rendezvous_iterator)
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/rendezvous.py", line 175, in _env_rendezvous_handler
+    rank = int(_get_env_or_raise("RANK"))
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/rendezvous.py", line 159, in _get_env_or_raise
+    raise _env_error(env_var)
+ValueError: Error initializing torch.distributed using env:// rendezvous: environment variable RANK expected, but not set
+```
+
+2. Create Synthetic Data using paper approach
+
+3. Train a segmentation model
+
+4. Evaluate
+
 
 ### Missing details
 Using the provided docker :
