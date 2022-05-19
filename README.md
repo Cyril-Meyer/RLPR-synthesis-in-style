@@ -309,18 +309,21 @@ PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out
 ```
 # in-domain - ours - EMANet
 PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_sis_stylegan_emanet/results.json /rlpr/benchmark_dataset/in-domain-images.txt /rlpr/out_sis_stylegan_emanet/results_in-domain-images.json
-PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan_ufcn/results_in-domain-images.json -c -p
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan_emanet/results_in-domain-images.json -c -p
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan_emanet/results_in-domain-images.json -c -r min_confidence 0.3 min_contour_area 15 patch_overlap 0.5
 
 # out-domain - ours - EMANet
 PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_sis_stylegan_emanet/results.json /rlpr/benchmark_dataset/out-of-domain-images.txt /rlpr/out_sis_stylegan_emanet/results_out-domain-images.json
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_sis_stylegan_emanet/results_out-domain-images.json -c -r min_confidence 0.3 min_contour_area 15 patch_overlap 0.5
 
 # in-domain - DatasetGAN - EMANet
 PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_datasetgan_stylegan_emanet/results.json /rlpr/benchmark_dataset/in-domain-images.txt /rlpr/out_datasetgan_stylegan_emanet/results_in-domain-images.json
-PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_datasetgan_stylegan_ufcn/results_in-domain-images.json -c -p
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_datasetgan_stylegan_emanet/results_in-domain-images.json -c -p
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_datasetgan_stylegan_emanet/results_in-domain-images.json -c -r min_confidence 0.3 min_contour_area 15 patch_overlap 0.5
 
 # out-domain - DatasetGAN - EMANet
 PYTHONPATH='.' python3.8 ./segmentation/evaluation/extract_results_subset.py /rlpr/out_datasetgan_stylegan_emanet/results.json /rlpr/benchmark_dataset/out-of-domain-images.txt /rlpr/out_datasetgan_stylegan_emanet/results_out-domain-images.json
-
+PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out_datasetgan_stylegan_emanet/results_in-domain-images.json -c -r min_confidence 0.3 min_contour_area 15 patch_overlap 0.5
 ```
 
 
