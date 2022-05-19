@@ -7,9 +7,16 @@
 #### Tables I - VI
 Tables I - III are short version of tables IV - V.
 
-in progress
-![image](https://user-images.githubusercontent.com/69190238/169384069-c175a7b1-4acd-4beb-9a08-96a8a1398300.png)
+![image](https://user-images.githubusercontent.com/69190238/169410907-51a05a5e-41b0-41a6-9135-b99311555eef.png)
 
+| **in-domain - ours - TransUNet** | min_confidence | min_contour_area | patch_overlap | dice_weighted_avg | dice_weighted_text_avg | dice_background | dice_printed_text | dice_handwritten_text | iou_weighted_avg | iou_weighted_text_avg | iou_background | iou_printed_text | iou_handwritten_text | precision_weighted_avg | precision_weighted_text_avg | precision_background | precision_printed_text | precision_handwritten_text | recall_weighted_avg | recall_weighted_text_avg | recall_background | recall_printed_text | recall_handwritten_text |
+|---:|-----------------:|-------------------:|----------------:|--------------------:|-------------------------:|------------------:|--------------------:|------------------------:|-------------------:|------------------------:|-----------------:|-------------------:|-----------------------:|-------------------------:|------------------------------:|-----------------------:|-------------------------:|-----------------------------:|----------------------:|---------------------------:|--------------------:|----------------------:|--------------------------:|
+| paper | 0.9 | 15 | 0.5 | 0.996268 | 0.821749 | 0.998238 | 0.833186 | 0.632954 | 0.72452 | 0.699729 | 0.996482 | 0.714069 | 0.463008 | 0.996241 | 0.833212 | 0.99808 | 0.842972 | 0.672105 | 0.996301 | 0.810744 | 0.998395 | 0.823625 | 0.598112 |
+
+
+| **out-domain - ours - TransUNet** | min_confidence | min_contour_area | patch_overlap | dice_weighted_avg | dice_weighted_text_avg | dice_background | dice_printed_text | dice_handwritten_text | iou_weighted_avg | iou_weighted_text_avg | iou_background | iou_printed_text | iou_handwritten_text | precision_weighted_avg | precision_weighted_text_avg | precision_background | precision_printed_text | precision_handwritten_text | recall_weighted_avg | recall_weighted_text_avg | recall_background | recall_printed_text | recall_handwritten_text |
+|---:|-----------------:|-------------------:|----------------:|--------------------:|-------------------------:|------------------:|--------------------:|------------------------:|-------------------:|------------------------:|-----------------:|-------------------:|-----------------------:|-------------------------:|------------------------------:|-----------------------:|-------------------------:|-----------------------------:|----------------------:|---------------------------:|--------------------:|----------------------:|--------------------------:|
+| paper | 0.9 | 15 | 0.5 | 0.981201 | 0.573953 | 0.992346 | 0.635311 | 0.294833 | 0.541083 | 0.4128 | 0.984809 | 0.465536 | 0.172905 | 0.981267 | 0.778647 | 0.986812 | 0.865515 | 0.383484 | 0.983468 | 0.454556 | 0.997943 | 0.501837 | 0.239473 |
 
 #### Figures 3 - 7
 Figure 3 = Figure 4
@@ -17,7 +24,6 @@ Figure 3 = Figure 4
 | fig 4 | fig 5 | fig 6 | fig 7 |
 | ----- | ----- | ----- | ----- |
 | ![figures 4](figures/89r2yz1e4hd90_both_min_confidence_0_9_min_contour_area_15_patch_overlap_0__0_5_segmented_no_bboxes.png) | ![figures 5](figures/ozey203xgb369_printed_over_image_min_confidence_0_9_min_contour_area_15_patch_overlap_0__0_5_segmented_no_bboxes.png) | ![figures 6](figures/kynugqpw6mmsj_cover_greenish_min_confidence_0_9_min_contour_area_15_patch_overlap_0__0_5_segmented_no_bboxes.png) | ![figures 7](figures/WPI_GACHET_2018_010_0160_handwritten_printed_greyish_min_confidence_0_9_min_contour_area_15_patch_overlap_0__0_5_segmented_no_bboxes.png)
-
 
 ### Get the code and data
 ```
