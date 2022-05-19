@@ -13,7 +13,13 @@ in progress
 ![image](https://user-images.githubusercontent.com/69190238/169360129-53c2d45b-93c6-467f-9e85-4af182568250.png)
 
 #### Figures 3 - 7
-not done yet
+Figure 3 = Figure 4
+
+| fig 4 | fig 5 | fig 6 | fig 7 |
+| ----- | ----- | ----- | ----- |
+| ![figures 4](figures/89r2yz1e4hd90_both_min_confidence_0_9_min_contour_area_15_patch_overlap_0__0_5_segmented_no_bboxes.png) | ![figures 5](figures/ozey203xgb369_printed_over_image_min_confidence_0_9_min_contour_area_15_patch_overlap_0__0_5_segmented_no_bboxes.png) | ![figures 6](figures/kynugqpw6mmsj_cover_greenish_min_confidence_0_9_min_contour_area_15_patch_overlap_0__0_5_segmented_no_bboxes.png) | ![figures 7](figures/WPI_GACHET_2018_010_0160_handwritten_printed_greyish_min_confidence_0_9_min_contour_area_15_patch_overlap_0__0_5_segmented_no_bboxes.png)
+
+
 
 ### Get the code and data
 ```
