@@ -37,6 +37,7 @@ wget https://bartzi.de/documents/attachment/download\?hash_value\=dd15bbce1b4220
 wget https://bartzi.de/documents/attachment/download\?hash_value\=9ccec0a8c423832554a2c4babc9679d4_67 -O sis_stylegan.tar.gz
 wget https://bartzi.de/documents/attachment/download?hash_value=1c52f3da5539c3b2be134f2f6d6753d2_68 -O datasetgan_swagan.tar.gz
 wget https://bartzi.de/documents/attachment/download?hash_value=b6d671c7fb5e625cacbc10509789498c_69 -O datasetgan_stylegan.tar.gz
+wget https://bartzi.de/documents/attachment/download?hash_value=52c89c982dc413cf16daa042844d93e7_70 -O stylegan_model.tar.gz
 ```
 
 ```
@@ -45,6 +46,7 @@ unzip benchmark_dataset.zip
 7z x -so sis_stylegan.tar.gz | 7z x -si -ttar
 7z x -so datasetgan_swagan.tar.gz | 7z x -si -ttar
 7z x -so datasetgan_stylegan.tar.gz | 7z x -si -ttar
+7z x -so stylegan_model.tar.gz | 7z x -si -ttarhttps://bartzi.de/documents/attachment/download?hash_value=52c89c982dc413cf16daa042844d93e7_70
 ```
 
 ### Using the provided docker image
