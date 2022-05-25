@@ -46,7 +46,7 @@ unzip benchmark_dataset.zip
 7z x -so sis_stylegan.tar.gz | 7z x -si -ttar
 7z x -so datasetgan_swagan.tar.gz | 7z x -si -ttar
 7z x -so datasetgan_stylegan.tar.gz | 7z x -si -ttar
-7z x -so stylegan_model.tar.gz | 7z x -si -ttarhttps://bartzi.de/documents/attachment/download?hash_value=52c89c982dc413cf16daa042844d93e7_70
+7z x -so stylegan_model.tar.gz | 7z x -si -ttar
 ```
 
 ### Using the provided docker image
