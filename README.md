@@ -4,8 +4,18 @@
 * [paper](https://arxiv.org/pdf/2107.06777.pdf)
 
 ###  Results that can be reproduced
-#### Tables I - VI
+
+1. 🔴 Train a StyleGAN model.  
+🚧 The original dataset is not publicly available.
+2. 🔲 Use the model to create synthetic data using either our approach or DatasetGAN
+3. 🔲 Train segmentation models on the synthetic data
+4. ✅ Evaluate the results
+
+#### ✅ Tables I - VI
 Tables I - III are short version of tables IV - V.
+During the review, we found errors in the tables values, the authors corrected the errors in the v3 version.
+<details>
+  <summary>v2 errors</summary>
 
 ![image](https://user-images.githubusercontent.com/69190238/169410907-51a05a5e-41b0-41a6-9135-b99311555eef.png)
 
@@ -18,7 +28,9 @@ Tables I - III are short version of tables IV - V.
 |---:|-----------------:|-------------------:|----------------:|--------------------:|-------------------------:|------------------:|--------------------:|------------------------:|-------------------:|------------------------:|-----------------:|-------------------:|-----------------------:|-------------------------:|------------------------------:|-----------------------:|-------------------------:|-----------------------------:|----------------------:|---------------------------:|--------------------:|----------------------:|--------------------------:|
 | paper | 0.9 | 15 | 0.5 | 0.981201 | 0.573953 | 0.992346 | 0.635311 | 0.294833 | 0.541083 | 0.4128 | 0.984809 | 0.465536 | 0.172905 | 0.981267 | 0.778647 | 0.986812 | 0.865515 | 0.383484 | 0.983468 | 0.454556 | 0.997943 | 0.501837 | 0.239473 |
 
-#### Figures 3 - 7
+</details>
+
+#### ✅ Figures 3 - 7
 Figure 3 = Figure 4
 
 | fig 4 | fig 5 | fig 6 | fig 7 |
