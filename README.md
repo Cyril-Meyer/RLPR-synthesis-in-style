@@ -366,6 +366,8 @@ docker run -v $(pwd):/rlpr -it --rm --gpus all hendraet/synthesis-in-style:cuda-
 cd /rlpr/synthesis-in-style/stylegan_code_finder/
 ```
 
+**🔴 Create a Segmentation**
+
 ```
 python3 create_semantic_segmentation.py \
   /rlpr/stylegan2.pt \
@@ -378,6 +380,31 @@ Traceback (most recent call last):
   File "create_semantic_segmentation.py", line 202, in <module>
     main(parser.parse_args())
   File "create_semantic_segmentation.py", line 165, in main
+    config = load_config(args.checkpoint, None)
+  File "/rlpr/synthesis-in-style/stylegan_code_finder/utils/config.py", line 23, in load_config
+    with open(original_config) as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/config/config.json'
+```
+
+**🔴 Create Dataset**
+
+```
+python3 create_dataset_for_segmentation.py \
+  /rlpr/stylegan2.pt \
+  configs/dataset_creation/stylegan2_cluster_based_bw_hwp_wpi.json \
+  --num-clusters 20 \
+  -s /rlpr/out \
+  -b 8 \
+  -n 100000
+```
+
+```
+Traceback (most recent call last):
+  File "create_dataset_for_segmentation.py", line 239, in <module>
+    main(parsed_args)
+  File "create_dataset_for_segmentation.py", line 179, in main
+    build_dataset(args, config)
+  File "create_dataset_for_segmentation.py", line 115, in build_dataset
     config = load_config(args.checkpoint, None)
   File "/rlpr/synthesis-in-style/stylegan_code_finder/utils/config.py", line 23, in load_config
     with open(original_config) as f:
