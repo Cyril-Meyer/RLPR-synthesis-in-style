@@ -355,47 +355,34 @@ PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out
 ### Evaluate newly trained segmentation models
 
 ```
-# replace "/home/cyril/Development/RLPR" with "$(pwd)"
-docker run -v /home/cyril/Development/RLPR:/rlpr -it --rm --gpus all hendraet/synthesis-in-style:cuda-11.1
+docker run -v $(pwd):/rlpr -it --rm --gpus all hendraet/synthesis-in-style:cuda-11.1
 ```
 
-1. Train StyleGAN2
-```
-cd /rlpr/synthesis-in-style/stylegan_code_finder/scripts
-```
-
-```
-python3 create_stylegan_train_dataset.py /rlpr/benchmark_dataset/original /rlpr/train_StyleGAN2_dataset 50000
-```
-
-```
-cd /rlpr/synthesis-in-style/stylegan_code_finder/ 
-```
-
-```
-PYTHONPATH='.' python3.8 train_stylegan_2.py \
-  configs/stylegan/stylegan_256px.yaml \
-  --images /rlpr/train_StyleGAN2_dataset/train.json \
-  --val-images /rlpr/train_StyleGAN2_dataset/val.json \
-  -l /rlpr/out_cyril_sis_stylegan \
-  -ln wpi_auction_catalogues \
-  --wandb-project-name synthesis-in-style \
-  --wandb-entity cyril-meyer
-```
-```
-Traceback (most recent call last):
-  File "train_stylegan_2.py", line 211, in <module>
-    torch.distributed.init_process_group(backend=args.mpi_backend, init_method='env://')
-  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/distributed_c10d.py", line 520, in init_process_group
-    store, rank, world_size = next(rendezvous_iterator)
-  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/rendezvous.py", line 175, in _env_rendezvous_handler
-    rank = int(_get_env_or_raise("RANK"))
-  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/rendezvous.py", line 159, in _get_env_or_raise
-    raise _env_error(env_var)
-ValueError: Error initializing torch.distributed using env:// rendezvous: environment variable RANK expected, but not set
-```
+1. 🔴 Train StyleGAN2
 
 2. Create Synthetic Data using paper approach
+
+```
+cd /rlpr/synthesis-in-style/stylegan_code_finder/
+```
+
+```
+python3 create_semantic_segmentation.py \
+  /rlpr/stylegan2.pt \
+  -c 20 24 \
+  --destination /rlpr/out
+```
+
+```
+Traceback (most recent call last):
+  File "create_semantic_segmentation.py", line 202, in <module>
+    main(parser.parse_args())
+  File "create_semantic_segmentation.py", line 165, in main
+    config = load_config(args.checkpoint, None)
+  File "/rlpr/synthesis-in-style/stylegan_code_finder/utils/config.py", line 23, in load_config
+    with open(original_config) as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/config/config.json'
+```
 
 3. Train a segmentation model
 
