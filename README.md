@@ -366,25 +366,19 @@ docker run -v $(pwd):/rlpr -it --rm --gpus all hendraet/synthesis-in-style:cuda-
 cd /rlpr/synthesis-in-style/stylegan_code_finder/
 ```
 
-**🔴 Create a Segmentation**
+**Create a Segmentation**
 
 ```
 python3 create_semantic_segmentation.py \
   /rlpr/stylegan2.pt \
   -c 20 24 \
-  --destination /rlpr/out
+  --destination /rlpr/out \
+  --original-config-path /rlpr/synthesis-in-style/stylegan_code_finder/configs/stylegan/stylegan_256px_original_config.yaml
 ```
 
-```
-Traceback (most recent call last):
-  File "create_semantic_segmentation.py", line 202, in <module>
-    main(parser.parse_args())
-  File "create_semantic_segmentation.py", line 165, in main
-    config = load_config(args.checkpoint, None)
-  File "/rlpr/synthesis-in-style/stylegan_code_finder/utils/config.py", line 23, in load_config
-    with open(original_config) as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/config/config.json'
-```
+using the docker image, we got a the following warning :
+`OpenBLAS Warning : Detect OpenMP Loop and this application may hang. Please rebuild the library with USE_OPENMP=1 option.`
+
 
 **🔴 Create Dataset**
 
