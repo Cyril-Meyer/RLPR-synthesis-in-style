@@ -379,6 +379,13 @@ python3 create_semantic_segmentation.py \
 using the docker image, we got a the following warning :
 `OpenBLAS Warning : Detect OpenMP Loop and this application may hang. Please rebuild the library with USE_OPENMP=1 option.`
 
+**🔴 Label Clusters**
+```
+docker run -v $(pwd):/rlpr -it --rm --gpus all -p 5000:5000 hendraet/synthesis-in-style:cuda-11.1
+cd /rlpr/synthesis-in-style/semantic_labeller
+flask run --host 0.0.0.0
+```
+
 
 **🔴 Create Dataset**
 
