@@ -360,6 +360,8 @@ docker run -v $(pwd):/rlpr -it --rm --gpus all hendraet/synthesis-in-style:cuda-
 
 1. 🔴 Train StyleGAN2
 
+Training data not public.
+
 2. Create Synthetic Data using paper approach
 
 ```
@@ -379,18 +381,31 @@ python3 create_semantic_segmentation.py \
 using the docker image, we got a the following warning :
 `OpenBLAS Warning : Detect OpenMP Loop and this application may hang. Please rebuild the library with USE_OPENMP=1 option.`
 
-**Label Clusters**
+**⚠️ Label Clusters**
 ```
 docker run -v $(pwd):/rlpr -it --rm --gpus all -p 5000:5000 hendraet/synthesis-in-style:cuda-11.1
 cd /rlpr/synthesis-in-style/semantic_labeller
 flask run --host 0.0.0.0
 ```
 
-Fot this step, I ask the original author to annotate the created data, and to send me the results :
+Fot this step, I ask the original author to annotate the created data, and to send me the results (location : /rlpr/out) :
 * merged_classes_22.json
 * reproduction.json
 
-**🔴 Create Dataset**
+**Create Dataset**
+
+```
+python3 create_dataset_for_segmentation.py \
+  /rlpr/stylegan2.pt \
+  /rlpr/out/reproduction.json \
+  --original-config-path /rlpr/synthesis-in-style/stylegan_code_finder/configs/stylegan/stylegan_256px_original_config.yaml \
+  --num-clusters 22 \
+  -s /rlpr/out2 \
+  -b 8 \
+  -n 100 \
+  --semantic-segmentation-base-dir /rlpr/out \
+  --debug
+```
 
 ```
 python3 create_dataset_for_segmentation.py \
@@ -401,10 +416,8 @@ python3 create_dataset_for_segmentation.py \
   -s /rlpr/out2 \
   -b 8 \
   -n 100000 \
-  --debug
+  --semantic-segmentation-base-dir /rlpr/out
 ```
-
-🔴
 
 3. Train a segmentation model
 
