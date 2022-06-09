@@ -379,38 +379,32 @@ python3 create_semantic_segmentation.py \
 using the docker image, we got a the following warning :
 `OpenBLAS Warning : Detect OpenMP Loop and this application may hang. Please rebuild the library with USE_OPENMP=1 option.`
 
-**🔴 Label Clusters**
+**Label Clusters**
 ```
 docker run -v $(pwd):/rlpr -it --rm --gpus all -p 5000:5000 hendraet/synthesis-in-style:cuda-11.1
 cd /rlpr/synthesis-in-style/semantic_labeller
 flask run --host 0.0.0.0
 ```
 
+Fot this step, I ask the original author to annotate the created data, and to send me the results :
+* merged_classes_22.json
+* reproduction.json
 
 **🔴 Create Dataset**
 
 ```
 python3 create_dataset_for_segmentation.py \
   /rlpr/stylegan2.pt \
-  configs/dataset_creation/stylegan2_cluster_based_bw_hwp_wpi.json \
-  --num-clusters 20 \
-  -s /rlpr/out \
+  /rlpr/out/reproduction.json \
+  --original-config-path /rlpr/synthesis-in-style/stylegan_code_finder/configs/stylegan/stylegan_256px_original_config.yaml \
+  --num-clusters 22 \
+  -s /rlpr/out2 \
   -b 8 \
-  -n 100000
+  -n 100000 \
+  --debug
 ```
 
-```
-Traceback (most recent call last):
-  File "create_dataset_for_segmentation.py", line 239, in <module>
-    main(parsed_args)
-  File "create_dataset_for_segmentation.py", line 179, in main
-    build_dataset(args, config)
-  File "create_dataset_for_segmentation.py", line 115, in build_dataset
-    config = load_config(args.checkpoint, None)
-  File "/rlpr/synthesis-in-style/stylegan_code_finder/utils/config.py", line 23, in load_config
-    with open(original_config) as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/config/config.json'
-```
+🔴
 
 3. Train a segmentation model
 
