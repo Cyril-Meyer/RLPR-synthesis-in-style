@@ -358,11 +358,11 @@ PYTHONPATH='.' python3.8 ./segmentation/evaluation/evaluate_metrics.py /rlpr/out
 docker run -v $(pwd):/rlpr -it --rm --gpus all hendraet/synthesis-in-style:cuda-11.1
 ```
 
-1. 🔴 Train StyleGAN2
+### 1. 🔴 Train StyleGAN2
 
 Training data not public.
 
-2. Create Synthetic Data using paper approach
+### 2. Create Synthetic Data using paper approach
 
 ```
 cd /rlpr/synthesis-in-style/stylegan_code_finder/
@@ -419,9 +419,22 @@ python3 create_dataset_for_segmentation.py \
   --semantic-segmentation-base-dir /rlpr/out
 ```
 
-3. Train a segmentation model
+### 3. Train a segmentation model
 
-4. Evaluate
+```
+python3 scripts/balance_segmentation_train_gt.py /rlpr/out2/train.json
+```
+
+```
+python3 -m torch.distributed.launch --nproc_per_node 4 train.py \
+  configs/segmenter/stylegan2_trans_u_net_segmenter.yaml \
+  --images /rlpr/out2/train_balanced.json \
+  --val-images /rlpr/out2/val.json \
+  -l /rlpr/out3 \
+  -ln stylegan2_trans_u_net_test
+```
+
+### 4. Evaluate
 
 
 ### Missing details
