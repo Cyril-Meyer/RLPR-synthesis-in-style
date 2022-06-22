@@ -419,14 +419,14 @@ python3 create_dataset_for_segmentation.py \
   --semantic-segmentation-base-dir /rlpr/out
 ```
 
-### 3. Train a segmentation model
+### 3. 🔴 Train a segmentation model
 
 ```
 python3 scripts/balance_segmentation_train_gt.py /rlpr/out2/train.json
 ```
 
 ```
-python3 -m torch.distributed.launch --nproc_per_node 4 train.py \
+python3 train.py \
   configs/segmenter/stylegan2_trans_u_net_segmenter.yaml \
   --images /rlpr/out2/train_balanced.json \
   --val-images /rlpr/out2/val.json \
@@ -434,7 +434,21 @@ python3 -m torch.distributed.launch --nproc_per_node 4 train.py \
   -ln stylegan2_trans_u_net_test
 ```
 
-### 4. Evaluate
+```
+Training script started
+Traceback (most recent call last):
+  File "train.py", line 161, in <module>
+    torch.distributed.init_process_group(backend=parsed_args.mpi_backend, init_method='env://')
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/distributed_c10d.py", line 520, in init_process_group
+    store, rank, world_size = next(rendezvous_iterator)
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/rendezvous.py", line 175, in _env_rendezvous_handler
+    rank = int(_get_env_or_raise("RANK"))
+  File "/usr/local/lib/python3.8/dist-packages/torch/distributed/rendezvous.py", line 159, in _get_env_or_raise
+    raise _env_error(env_var)
+ValueError: Error initializing torch.distributed using env:// rendezvous: environment variable RANK expected, but not set
+```
+
+### 4. 🔴 Evaluate
 
 
 ### Missing details
